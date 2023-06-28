@@ -1,6 +1,7 @@
 import http from "http";
 import { Server } from "socket.io";
 import express from "express";
+import { uniqueNamesGenerator, colors, names } from "unique-names-generator";
 
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,15 @@ function getAllMessages() {
   return Array.from(messages).reverse();
 }
 
+function getUniqueName() {
+  return uniqueNamesGenerator({
+    dictionaries: [names, colors],
+    length: 2,
+    style: "capital",
+    separator: " ",
+  });
+}
+
 app.use(express.static(process.cwd() + "/frontend"));
 
 app.get("/", (req, res) => {
@@ -18,14 +28,16 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  const username = getUniqueName();
+  console.log(`${username} connected`);
 
   socket.emit("receive-messages", {
     chatHistory: getAllMessages(),
+    username,
   });
 
   socket.on("post-message", (data) => {
-    const { username, message } = data || { username: "", message: "" };
+    const { message } = data || { username: "", message: "" };
     messages.push({
       username,
       message,
@@ -36,10 +48,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log(`${username} disconnected`);
   });
 });
 
 server.listen(3000, () => {
-  console.log("listening on *:3000");
+  console.log("listening on http://localhost:3000");
 });

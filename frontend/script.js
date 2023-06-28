@@ -5,20 +5,19 @@ let chatHistory = [];
 const socket = io();
 
 socket.on("receive-messages", (data) => {
-  console.log(data);
-  const { chatHistory } = data || [];
+  const { chatHistory, username } = data || {};
+  if (username !== undefined) updateUsername(username);
   render(chatHistory);
 });
 
 chat.addEventListener("submit", function (e) {
   e.preventDefault();
-  sendMessage(chat.elements.username.value, chat.elements.message.value);
+  sendMessage(chat.elements.message.value);
   chat.elements.message.value = "";
 });
 
-async function sendMessage(username, message) {
+async function sendMessage(message) {
   socket.emit("post-message", {
-    username,
     message,
   });
 }
@@ -30,6 +29,10 @@ function render(chatHistory) {
     })
     .join("\n");
   chatWindow.innerHTML = html;
+}
+
+function updateUsername(username) {
+  document.querySelector("h1").innerHTML = username;
 }
 
 function messageTemplate(username, message) {
