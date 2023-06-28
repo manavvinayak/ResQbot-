@@ -30,18 +30,26 @@
           color-dodge, normal;
         overflow: hidden;
       }
+      .chat-window::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-window {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
     </style>
   </head>
 
   <body class="flex justify-center mt-14 h-screen">
     <div class="w-full max-w-lg">
-      <div class="bg-gray-600 text-white rounded-lg shadow-md p-6">
+      <div class="bg-gray-600 text-white rounded-t-lg shadow-md p-6">
         <h2 class="text-xl font-semibold mb-4">Chat Window</h2>
 
         <div class="flex flex-col space-y-4 chat-window"></div>
       </div>
 
-      <div class="bg-gray-600 rounded-lg shadow-md p-5 mt-6">
+      <div class="bg-gray-600 rounded-b-lg shadow-md p-5">
         <h1 class="text-2xl text-white font-semibold mb-4"></h1>
 
         <form class="chat">
@@ -50,7 +58,7 @@
             <input
               type="text"
               class="border border-gray-300 rounded-lg px-4 py-2 flex-grow"
-              placeholder="Message"
+              placeholder="Type your message here"
               id="message"
             />
 
