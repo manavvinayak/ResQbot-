@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "serve": "node backend/server.js"
+    "serve": "node backend/server-starter.js",
+    "completed": "node backend/server.js"
   },
   "repository": {
     "type": "git",

@@ -4,46 +4,16 @@ import express from "express";
 import http from "http";
 
 // import the socket.io library
-import { Server } from "socket.io";
+// write code here for step: x
 
 // initializing the servers: HTTP as well as Web Socket
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+// write code here for step: x
 
 // create the chat history array for storing messages
-const chatHistory = [];
+// write code here for step: x
 
 // listen for new web socket connections
-io.on("connection", (socket) => {
-  const username = getUniqueUsername();
-  console.log(`${username} connected`);
-
-  // send the chat history to the client
-  socket.emit("receive-messages", {
-    chatHistory: getAllMessages(),
-    username,
-  });
-
-  // listen for new messages from the client
-  socket.on("post-message", (data) => {
-    const { message } = data || { username: "", message: "" };
-    chatHistory.push({
-      username,
-      message,
-    });
-
-    // send the updated chat history to all clients
-    io.emit("receive-messages", {
-      chatHistory: getAllMessages(),
-    });
-  });
-
-  // listen for disconnects and log them
-  socket.on("disconnect", () => {
-    console.log(`${username} disconnected`);
-  });
-});
+// write code here for step: x
 
 // Boilerplate code as well as Bonus section
 // HTTP server setup to serve the page assets
@@ -74,3 +44,4 @@ function getUniqueUsername() {
     separator: " ",
   });
 }
+
