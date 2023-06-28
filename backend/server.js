@@ -1,37 +1,18 @@
 // imports required for server
-import http from "http";
-import { Server } from "socket.io";
-import express from "express";
 import { uniqueNamesGenerator, colors, names } from "unique-names-generator";
+import express from "express";
+import http from "http";
 
-// initializing the servers
+// import the socket.io library
+import { Server } from "socket.io";
+
+// initializing the servers: HTTP as well as Web Socket
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-const messages = [];
 
-// helper functions
-// get all messages in the order they were sent
-function getAllMessages() {
-  return Array.from(messages).reverse();
-}
 
-// generate a unique username for each user
-function getUniqueUsername() {
-  return uniqueNamesGenerator({
-    dictionaries: [names, colors],
-    length: 2,
-    style: "capital",
-    separator: " ",
-  });
-}
-
-// HTTP server setup to serve the page
-app.use(express.static(process.cwd() + "/frontend"));
-
-app.get("/", (req, res) => {
-  return res.sendFile(process.cwd() + "/frontend/index.html");
-});
+const chatHistory = [];
 
 // listen for new web socket connections
 io.on("connection", (socket) => {
@@ -47,7 +28,7 @@ io.on("connection", (socket) => {
   // listen for new messages from the client
   socket.on("post-message", (data) => {
     const { message } = data || { username: "", message: "" };
-    messages.push({
+    chatHistory.push({
       username,
       message,
     });
@@ -64,7 +45,31 @@ io.on("connection", (socket) => {
   });
 });
 
+// HTTP server setup to serve the page assets
+app.use(express.static(process.cwd() + "/frontend"));
+
+// HTTP server setup to serve the page at /
+app.get("/", (req, res) => {
+  return res.sendFile(process.cwd() + "/frontend/index.html");
+});
+
 // start the HTTP server to serve the page
 server.listen(3000, () => {
   console.log("listening on http://localhost:3000");
 });
+
+// helper functions
+// get all messages in the order they were sent
+function getAllMessages() {
+  return Array.from(chatHistory).reverse();
+}
+
+// generate a unique username for each user
+function getUniqueUsername() {
+  return uniqueNamesGenerator({
+    dictionaries: [names, colors],
+    length: 2,
+    style: "capital",
+    separator: " ",
+  });
+}
