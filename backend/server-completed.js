@@ -15,7 +15,7 @@ const io = new Server(server);
 const chatHistory = [];
 
 // listen for new web socket connections
-io.on("connection", (socket) => {
+io.on("connection", function callback(socket) {
   const username = getUniqueUsername();
   console.log(`${username} connected`);
 
@@ -26,8 +26,8 @@ io.on("connection", (socket) => {
   });
 
   // listen for new messages from the client
-  socket.on("post-message", (data) => {
-    const { message } = data || { username: "", message: "" };
+  socket.on("post-message", function receiveMessages(data) {
+    const { message } = data || { message: "" };
     chatHistory.push({
       username,
       message,
