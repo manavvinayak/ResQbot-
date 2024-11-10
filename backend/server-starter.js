@@ -1,5 +1,5 @@
 // imports required for server
-import { uniqueNamesGenerator, colors, names } from "unique-names-generator";
+import { uniqueNamesGenerator, names, adjectives } from "unique-names-generator";
 import express from "express";
 import http from "http";
 
@@ -17,7 +17,7 @@ const chatHistory = [];
 // listen for new web socket connections
 io.on("connection", function callback(socket) {
   const username = getUniqueUsername();
-  console.log(`${username} connected`);
+  console.log(`${username} is connected`);
 
   // send the chat history to the client
   socket.emit("receive-messages", {
@@ -42,7 +42,7 @@ io.on("connection", function callback(socket) {
 
   // listen for disconnects and log them
   socket.on("disconnect", () => {
-    console.log(`${username} disconnected`);
+    console.log(`${username} is disconnected`);
   });
 });
 
@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
 
 // start the HTTP server to serve the page
 server.listen(3000, () => {
-  console.log("listening on http://localhost:3000");
+  console.log("running live on http://localhost:3000");
 });
 
 // helper functions
@@ -67,9 +67,12 @@ function getAllMessages() {
 }
 
 // generate a unique username for each user
+const indianNames = ["Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan","Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Mohammed", "Ritvik", "Darsh", "Rudra", "Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan", "Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Mohammed", "Ritvik", "Darsh", "Rudra"];
+const surname = ["Sharma", "Verma", "Gupta", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Mishra", "Shukla", "Jaiswal", "Jain", "Goswami", "Shah", "Pandey", "Chauhan", "Choudhary", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Srivastava", "Mishra", "Shukla", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Srivastava", "Mishra", "Shukla", "Jaiswal", "Jain", "Goswami", "Shah", "Pandey", "Chauhan", "Choudhury"];
+
 function getUniqueUsername() {
   return uniqueNamesGenerator({
-    dictionaries: [names, colors],
+    dictionaries: [indianNames, surname],
     length: 2,
     style: "capital",
     separator: " ",
