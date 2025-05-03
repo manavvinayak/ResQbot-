@@ -40,7 +40,8 @@ function messageTemplate(username, message) {
             <div class="w-5 h-5 bg-green-400 text-white rounded-full flex items-center justify-center mr-2">
               <i class="fas fa-user"></i>
             </div>
-        <p class="text-gray-100 text-lg">${username}: ${message}</p>
+        <p class="text-white font-bold mr-2 text-xl">${username}:</p>
+        <p class="bg-blue-900 text-gray-100 text-lg px-2 py-1 rounded">${message}</p>
     </div>
     `;
 }

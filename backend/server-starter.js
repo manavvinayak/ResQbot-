@@ -67,7 +67,7 @@ function getAllMessages() {
 }
 
 // generate a unique username for each user
-const indianNames = ["Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan","Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Mohammed", "Ritvik", "Darsh", "Rudra", "Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan", "Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Mohammed", "Ritvik", "Darsh", "Rudra"];
+const indianNames = ["Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan","Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Ritvik", "Darsh", "Rudra", "Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Ayaan", "Krishna", "Ishaan", "Vinayal", "Aarush", "Arnav", "Aryan", "Ayush", "Dhruv", "Kabir", "Vivaan", "Rudra", "Shaurya", "Atharva", "Aarush", "Aarav", "Vihaan", "Reyansh", "Mohammed", "Ritvik", "Darsh", "Rudra"];
 const surname = ["Sharma", "Verma", "Gupta", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Mishra", "Shukla", "Jaiswal", "Jain", "Goswami", "Shah", "Pandey", "Chauhan", "Choudhary", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Srivastava", "Mishra", "Shukla", "Singh", "Kumar", "Yadav", "Jha", "Patel", "Patil", "Pawar", "Gawade", "Srivastava", "Mishra", "Shukla", "Jaiswal", "Jain", "Goswami", "Shah", "Pandey", "Chauhan", "Choudhury"];
 
 function getUniqueUsername() {
